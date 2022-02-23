@@ -5,6 +5,12 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGeneratorLib", "MapGeneratorLib\MapGeneratorLib.csproj", "{BA560206-6823-4E78-AB12-BFA06149EC9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGeneratorLibTest", "Tests\MapGeneratorLibTest\MapGeneratorLibTest.csproj", "{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{2DC41D0E-85FF-4EEF-A005-E0EFE14405EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{80DDA3C7-3429-4D37-BAE2-42B825D90A2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,17 @@ Global
 		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BA560206-6823-4E78-AB12-BFA06149EC9D} = {2DC41D0E-85FF-4EEF-A005-E0EFE14405EC}
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979} = {80DDA3C7-3429-4D37-BAE2-42B825D90A2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4BAC6203-3965-428A-A781-FC93BF87A2B5}
