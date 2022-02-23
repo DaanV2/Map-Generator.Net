@@ -3,6 +3,8 @@
   "additionalProperties": false,
   "definitions": {
     "range": {
+      "title": "Range",
+      "description": "A range of values.",
       "oneOf": [
         { "type": "number" },
         {
@@ -32,18 +34,31 @@
   "properties": {
     "$schema": { "type": "string" },
     "outputfolder": {
-      "type": "string", "title": "Output Folder"
+      "type": "string",
+      "title": "Output Folder"
     },
     "images": {
-      "type": "array", "title": "Images",
+      "type": "array",
+      "title": "Images",
       "items": {
-        
+        "title": "Image",
+        "additionalProperties": false,
+        "properties": {
+          "filepath": { "type": "string", "title": "File Path" },
+          "range": { "$ref": "#/definitions/range" }
+        }
       }
     },
     "labels": {
-      "type": "array", "title": "Labels",
+      "type": "array",
+      "title": "Labels",
       "items": {
-          
+        "title": "Label",
+        "additionalProperties": false,
+        "properties": {
+          "text": { "type": "string", "title": "File Path" },
+          "range": { "$ref": "#/definitions/range" }
+        }
       }
     }
   }
