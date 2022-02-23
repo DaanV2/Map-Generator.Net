@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Text.Json.Serialization;
+using Map.Project.Serialization;
 
 namespace Map.Project {
     /// <summary>A range of numbers</summary>
+    [JsonConverter(typeof(RangeConverter))]
     public partial struct Range {
         /// <summary>Creates a new instance of <see cref="Range"/></summary>
         /// <param name="minimum">The minimum value</param>
