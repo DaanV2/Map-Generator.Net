@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "additionalProperties": false,
+  "definitions": {
+    "range": {
+      "oneOf": [
+        { "type": "number" },
+        {
+          "type": "array",
+          "items": [
+            { "type": "number", "title": "Minimum" },
+            { "type": "number", "title": "Maximum" }
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "min": {
+              "type": "number",
+              "title": "Minimum"
+            },
+            "max": {
+              "type": "number",
+              "title": "Maximum"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "properties": {
+    "$schema": { "type": "string" },
+    "outputfolder": {
+      "type": "string", "title": "Output Folder"
+    },
+    "images": {
+      "type": "array", "title": "Images",
+      "items": {
+        
+      }
+    },
+    "labels": {
+      "type": "array", "title": "Labels",
+      "items": {
+          
+      }
+    }
+  }
+}
