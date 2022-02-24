@@ -8,7 +8,9 @@ namespace Map.Project {
         public String Filepath { get; set; }
 
         /// <summary>Gets or sets layers the image needs to be placed on</summary>
-        [JsonPropertyName("range")]
+        [JsonPropertyName("zoom_range")]
         public Range Range { get; set; }
+
+
     }
 }
