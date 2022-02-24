@@ -29,6 +29,15 @@
           }
         }
       ]
+    },
+    "point": {
+      "title": "Point",
+      "description": "A range of values.",
+      "type": "array",
+      "items": [
+        { "type": "number", "title": "X" },
+        { "type": "number", "title": "Y" }
+      ]
     }
   },
   "properties": {
@@ -65,7 +74,8 @@
         "additionalProperties": false,
         "properties": {
           "text": { "type": "string", "title": "File Path" },
-          "range": { "$ref": "#/definitions/range" }
+          "range": { "$ref": "#/definitions/range" },
+          "point": { "$ref": "#/defintiions/point" }
         }
       }
     }
