@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "additionalProperties": false,
+  "required": ["outputfolder", "images", "labels"],
   "definitions": {
     "range": {
       "title": "Range",
@@ -49,13 +50,26 @@
     "images": {
       "type": "array",
       "title": "Images",
+      "description": "The specification of a single image",
       "items": {
         "title": "Image",
+        "description": "The specification of a single image",
         "additionalProperties": false,
+        "required": ["filepath", "zoom_range", "area"],
         "properties": {
-          "filepath": { "type": "string", "title": "File Path" },
-          "zoom_range": { "$ref": "#/definitions/range" },
+          "filepath": { 
+            "title": "File Path",
+            "description": "The path to the image file. can be relative",
+            "type": "string"
+          },
+          "zoom_range": {
+            "title": "Zoom Range",
+            "description": "The range of zoom levels this image needs to be placed upon.",
+            "$ref": "#/definitions/range" 
+          },
           "area": {
+            "title": "Area",
+            "description": "Area this image occupies on zoom level 0",
             "items": [
               { "type": "number", "title": "X" },
               { "type": "number", "title": "Y" },

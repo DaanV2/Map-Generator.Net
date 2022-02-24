@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Map.Project.Serialization;
 
 namespace Map.Project {
     ///DOLATER <summary>add description for struct: Area</summary>
+    [JsonConverter(typeof(AreaConverter))]
     public partial struct Area {
         /// <summary>Creates a new instance of <see cref="Area"/></summary>
         /// <param name="x"></param>
