@@ -45,7 +45,15 @@
         "additionalProperties": false,
         "properties": {
           "filepath": { "type": "string", "title": "File Path" },
-          "range": { "$ref": "#/definitions/range" }
+          "zoom_range": { "$ref": "#/definitions/range" },
+          "area": {
+            "items": [
+              { "type": "number", "title": "X" },
+              { "type": "number", "title": "Y" },
+              { "type": "number", "title": "Width" },
+              { "type": "number", "title": "Height" }
+            ]
+          }
         }
       }
     },
