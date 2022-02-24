@@ -43,9 +43,10 @@
   },
   "properties": {
     "$schema": { "type": "string" },
-    "outputfolder": {
+    "outputtiles": {
       "type": "string",
-      "title": "Output Folder"
+      "title": "Output Tiles",
+      "description": "The template path to go from x y z to a tilepath"
     },
     "images": {
       "type": "array",
