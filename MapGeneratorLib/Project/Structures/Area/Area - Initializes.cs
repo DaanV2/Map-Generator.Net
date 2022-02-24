@@ -16,7 +16,7 @@ namespace Map.Project {
         /// <param name="y"></param>
         /// <param name="length"></param>
         /// <param name="height"></param>
-        public Area(Int32 x, Int32 y, Int32 length, Int32 height) {
+        public Area(Single x, Single y, Single length, Single height) {
             this.X = x;
             this.Y = y;
             this.Length = length;

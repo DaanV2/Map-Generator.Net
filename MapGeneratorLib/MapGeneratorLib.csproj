@@ -5,8 +5,4 @@
     <RootNamespace>Map</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Process\" />
-  </ItemGroup>
-
 </Project>

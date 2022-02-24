@@ -6,25 +6,28 @@ namespace Map.Project.Serialization {
     public partial class AreaConverter : JsonConverter<Area> {
         /// <inheritdoc/>
         public override Area Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
-            Int32 X, Y, Length, Height;
+            Single X, Y, Length, Height;
 
             if (reader.TokenType != JsonTokenType.StartArray) throw new JsonException("Expected an array");
 
             reader.Read();
             if (reader.TokenType != JsonTokenType.Number) throw new JsonException("Expected a number");
-            X = reader.GetInt32();
+            X = reader.GetSingle();
 
             reader.Read();
             if (reader.TokenType != JsonTokenType.Number) throw new JsonException("Expected a number");
-            Y = reader.GetInt32();
+            Y = reader.GetSingle();
 
             reader.Read();
             if (reader.TokenType != JsonTokenType.Number) throw new JsonException("Expected a number");
-            Length = reader.GetInt32();
+            Length = reader.GetSingle();
 
             reader.Read();
             if (reader.TokenType != JsonTokenType.Number) throw new JsonException("Expected a number");
-            Height = reader.GetInt32();
+            Height = reader.GetSingle();
+
+            //Make sure we have read the array
+            while (reader.TokenType != JsonTokenType.EndArray) { reader.Read(); }
 
             return new Area(X, Y, Length, Height);
         }

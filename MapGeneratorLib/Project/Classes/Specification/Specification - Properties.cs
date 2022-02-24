@@ -5,8 +5,8 @@ using System.Text.Json.Serialization;
 namespace Map.Project {
     public partial class Specification {
         /// <summary>Gets or sets the output folder</summary>
-        [JsonPropertyName("outputfolder")]
-        public String OutputFolder { get; set; }
+        [JsonPropertyName("outputtiles")]
+        public String OutputTiles { get; set; }
 
         /// <summary>Gets or sets the images in this specification</summary>
         [JsonPropertyName("images")]

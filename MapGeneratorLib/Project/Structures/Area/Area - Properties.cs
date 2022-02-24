@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 namespace Map.Project {
     public partial struct Area {
         /// <summary></summary>
-        public Int32 X { get;set;}
+        public Single X { get;set;}
 
         /// <summary></summary>
-        public Int32 Y { get;set;}
+        public Single Y { get;set;}
 
         /// <summary></summary>
-        public Int32 Length { get;set;}
+        public Single Length { get;set;}
 
         /// <summary></summary>
-        public Int32 Height { get;set;}
+        public Single Height { get;set;}
     }
 }
