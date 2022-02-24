@@ -75,7 +75,7 @@
         "properties": {
           "text": { "type": "string", "title": "File Path" },
           "range": { "$ref": "#/definitions/range" },
-          "point": { "$ref": "#/defintiions/point" }
+          "point": { "$ref": "#/definitions/point" }
         }
       }
     }
