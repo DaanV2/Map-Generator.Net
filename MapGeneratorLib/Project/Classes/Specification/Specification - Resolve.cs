@@ -8,7 +8,7 @@ namespace Map.Project {
         /// </summary>
         /// <param name="BaseFolder"></param>
         private void Resolve(String BaseFolder) {
-            this.OutputFolder = Path.GetFullPath(this.OutputFolder, BaseFolder);
+            this.OutputTiles = Path.GetFullPath(this.OutputTiles, BaseFolder);
 
             foreach (Image Image in this.Images) {
                 Image.Filepath = Path.GetFullPath(Image.Filepath, BaseFolder);

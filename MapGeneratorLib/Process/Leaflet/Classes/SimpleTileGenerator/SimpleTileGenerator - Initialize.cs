@@ -7,6 +7,7 @@ namespace Map.Process.Leaflet {
         /// <param name="reporter"></param>
         public SimpleTileGenerator([NotNull] IReporter reporter) {
             this.Reporter = reporter ?? Reporters.GetEmptyReporter();
+            this.CRS = new CRS.SimpleCRS();
         }
     }
 }

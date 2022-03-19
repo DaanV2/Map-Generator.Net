@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Map.Project {
-    public partial struct Area : IEquatable<Area> {
+namespace Map.CRS {
+    public readonly partial struct Area : IEquatable<Area> {
         /// <inheritdoc/>
         public override Boolean Equals(Object obj) {
             return obj is Area area && this.Equals(area);
@@ -9,15 +14,13 @@ namespace Map.Project {
 
         /// <inheritdoc/>
         public Boolean Equals(Area other) {
-            return this.X == other.X &&
-                   this.Y == other.Y &&
-                   this.Length == other.Length &&
-                   this.Height == other.Height;
+            return this.Min.Equals(other.Min) &&
+                   this.Max.Equals(other.Max);
         }
 
         /// <inheritdoc/>
         public override Int32 GetHashCode() {
-            return HashCode.Combine(this.X, this.Y, this.Length, this.Height);
+            return HashCode.Combine(this.Min, this.Max);
         }
 
         /// <inheritdoc/>
@@ -28,11 +31,6 @@ namespace Map.Project {
         /// <inheritdoc/>
         public static Boolean operator !=(Area left, Area right) {
             return !(left == right);
-        }
-
-        /// <inheritdoc/>
-        public override String ToString() {
-            return $"[{this.X}, {this.Y}, {this.Length}, {this.Height}]";
         }
     }
 }

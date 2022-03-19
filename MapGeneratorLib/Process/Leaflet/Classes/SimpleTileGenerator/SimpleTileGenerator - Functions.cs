@@ -1,4 +1,5 @@
 ﻿using System;
+using Map.Images;
 using Map.Project;
 
 namespace Map.Process.Leaflet {
@@ -10,13 +11,8 @@ namespace Map.Process.Leaflet {
         /// <param name="Y"></param>
         /// <param name="Zoom"></param>
         /// <returns></returns>
-        public String GetTilePath(Specification Spec, Single X, Single Y, Int32 Zoom) {
-            Single zF = Zoom;
-
-            X *= zF;
-            Y *= zF;
-
-            return Spec.GetTilePath((Int32)X, (Int32)Y, (Int32)zF);
+        public ImageGate GetTilePath(Double X, Double Y, Int32 Zoom) {
+            return this.ImageHandler.Get((Int32)X, (Int32)Y, Zoom);
         }
     }
 }
