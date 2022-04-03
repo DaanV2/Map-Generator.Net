@@ -1,6 +1,7 @@
 ﻿using System;
 using Map.Project.Serialization;
 using System.Text.Json.Serialization;
+using Map.CRS.Serialization;
 
 namespace Map.CRS {
     ///DOLATER <summary>add description for struct: Area</summary>

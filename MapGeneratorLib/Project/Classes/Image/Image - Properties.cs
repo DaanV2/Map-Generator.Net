@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using Map.CRS;
 
 namespace Map.Project {
     public partial class Image {
@@ -11,7 +12,7 @@ namespace Map.Project {
         [JsonPropertyName("zoom_range")]
         public Range Range { get; set; }
 
-        /// <summary>Gets or sets area this image occupies on zoom level 0</summary>
+        /// <summary>Gets or sets area this image occupies on zoom level 0 in coordinates</summary>
         [JsonPropertyName("area")]
         public Area Area { get; set; }
     }

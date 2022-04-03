@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Map.Process {
     ///DOLATER <summary>add description for struct: Transformation</summary>
-    public partial struct Transformation {
+    public partial struct TransformationSpec {
         /// <summary>
         /// 
         /// </summary>

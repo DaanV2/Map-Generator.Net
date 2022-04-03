@@ -21,9 +21,9 @@ namespace Map.CRS {
         /// <returns></returns>
         public Point ToPoint(Coordinate A, Int32 Zoom) {
             Int32 Scale = this.Scale(Zoom);
-            var Result = this.ToPoint(A);
+            A = this.Transformation.UnTransform(A, Scale);
 
-            return this.Transform(Result, Scale);
+            return this.ToPoint(A);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Map.CRS {
         /// <returns></returns>
         public Coordinate ToCoordinate(Point A, Int32 Zoom) {
             Int32 Scale = this.Scale(Zoom);
-            A = this.UnTransform(A, Scale);
+            A = this.Transformation.Transform(A, Scale);
 
             return this.ToCoordinate(A);
         }
@@ -56,32 +56,6 @@ namespace Map.CRS {
         /// <returns></returns>
         public virtual Coordinate ToCoordinate(Point point) {
             return new Coordinate((Double)point.Y, (Double)point.X);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="point"></param>
-        /// <param name="Scale"></param>
-        /// <returns></returns>
-        public Rectangle Transform(Rectangle point, Int32 Scale) {
-            return new Rectangle(
-                    this.Transform(point.Location, Scale),
-                    (Size)this.Transform((Point)point.Size, Scale)
-                );
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="point"></param>
-        /// <param name="Scale"></param>
-        /// <returns></returns>
-        public Rectangle UnTransform(Rectangle point, Int32 Scale) {
-            return new Rectangle(
-                    this.UnTransform(point.Location, Scale),
-                    (Size)this.UnTransform((Point)point.Size, Scale)
-                );
         }
     }
 }

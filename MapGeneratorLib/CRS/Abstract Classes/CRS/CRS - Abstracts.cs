@@ -35,21 +35,5 @@ namespace Map.CRS {
         /// <param name="B"></param>
         /// <returns></returns>
         public abstract Double DistanceSquared(Coordinate A, Coordinate B);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="point"></param>
-        /// <param name="Scale"></param>
-        /// <returns></returns>
-        public abstract Point Transform(Point point, Int32 Scale);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="point"></param>
-        /// <param name="Scale"></param>
-        /// <returns></returns>
-        public abstract Point UnTransform(Point point, Int32 Scale);
     }
 }

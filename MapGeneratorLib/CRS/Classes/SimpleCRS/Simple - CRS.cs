@@ -31,20 +31,5 @@ namespace Map.CRS {
 
             return (dx * dx) + (dy * dy);
         }
-
-        /// <inheritdoc/>
-        public override Point Transform(Point point, Int32 Scale) {
-            Int32 x = ((point.X * 1) + 0) * Scale;
-            Int32 y = ((point.Y * -1) + 0) * Scale;
-
-            return new Point(x, y);
-        }
-
-        /// <inheritdoc/>
-        public override Point UnTransform(Point point, Int32 Scale) {
-            Int32 x = ((point.X / Scale) - 0) / 1;
-            Int32 y = ((point.Y / Scale) - 0) / -1;
-            return new Point(x, y);
-        }
     }
 }

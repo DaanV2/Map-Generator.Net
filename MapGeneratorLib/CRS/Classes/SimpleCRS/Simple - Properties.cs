@@ -6,6 +6,5 @@ using System.Threading.Tasks;
 
 namespace Map.CRS {
     public partial class SimpleCRS {
-        //DOLATER add properties to class Simple
     }
 }

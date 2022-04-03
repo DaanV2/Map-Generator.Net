@@ -12,8 +12,8 @@ namespace Map.Images {
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
         public void SetNewInformation() {
-            this.TileHeight = 128;
-            this.TileWidth = 128;
+            this.TileHeight = 256;
+            this.TileWidth = 256;
         }
     }
 }

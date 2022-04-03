@@ -30,7 +30,7 @@ namespace Map.CRS {
 
         /// <inheritdoc/>
         public override String ToString() {
-            return $"[{this.longitude},{this.latitude}]";
+            return $"latLng[{this.latitude},{this.longitude}]";
         }
     }
 }
