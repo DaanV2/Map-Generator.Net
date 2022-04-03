@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGeneratorLib", "MapGeneratorLib\MapGeneratorLib.csproj", "{BA560206-6823-4E78-AB12-BFA06149EC9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapGeneratorLib", "MapGeneratorLib\MapGeneratorLib.csproj", "{BA560206-6823-4E78-AB12-BFA06149EC9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapGeneratorLibTest", "Tests\MapGeneratorLibTest\MapGeneratorLibTest.csproj", "{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapGeneratorLibTest", "Tests\MapGeneratorLibTest\MapGeneratorLibTest.csproj", "{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{2DC41D0E-85FF-4EEF-A005-E0EFE14405EC}"
 EndProject
@@ -13,26 +13,40 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Programs", "Programs", "{47B7A94E-0D05-4F9D-B14D-836484CED02D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGenerator", "ConsoleGenerator\ConsoleGenerator.csproj", "{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleGenerator", "ConsoleGenerator\ConsoleGenerator.csproj", "{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Debug|x64.ActiveCfg = Debug|x64
+		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Debug|x64.Build.0 = Debug|x64
 		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Release|x64.ActiveCfg = Release|x64
+		{BA560206-6823-4E78-AB12-BFA06149EC9D}.Release|x64.Build.0 = Release|x64
 		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Debug|x64.ActiveCfg = Debug|x64
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Debug|x64.Build.0 = Debug|x64
 		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Release|x64.ActiveCfg = Release|x64
+		{4A1D9AA3-1F5D-4ED9-B899-D3AB133E6979}.Release|x64.Build.0 = Release|x64
 		{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}.Debug|x64.ActiveCfg = Debug|x64
+		{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}.Debug|x64.Build.0 = Debug|x64
 		{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}.Release|x64.ActiveCfg = Release|x64
+		{9BE8BAE1-DA9C-4D6E-90AF-51891D673A1F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

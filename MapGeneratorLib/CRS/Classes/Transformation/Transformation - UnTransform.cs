@@ -8,11 +8,11 @@ namespace Map.CRS {
         /// </summary>
         /// <param name="A"></param>
         /// <returns></returns>
-        public Size UnTransform(Size A, Int32 Scale) {
-            Double w = ((A.Width / Scale) - this.B) / this.A;
-            Double h = ((A.Height / Scale) - this.D) / this.C;
+        public SizeF UnTransform(SizeF A, Single Scale) {
+            Single w = ((A.Width / Scale) - this.B) / this.A;
+            Single h = ((A.Height / Scale) - this.D) / this.C;
 
-            return new Size((Int32)w, (Int32)h);
+            return new SizeF(w, h);
         }
 
         /// <summary>
@@ -21,11 +21,11 @@ namespace Map.CRS {
         /// <param name="A"></param>
         /// <param name="Scale"></param>
         /// <returns></returns>
-        public Point UnTransform(Point A, Int32 Scale) {
-            Double X = ((A.X / Scale) - this.B) / this.A;
-            Double Y = ((A.Y / Scale) - this.D) / this.C;
+        public PointF UnTransform(PointF A, Single Scale) {
+            Single X = ((A.X / Scale) - this.B) / this.A;
+            Single Y = ((A.Y / Scale) - this.D) / this.C;
 
-            return new Point((Int32)X, (Int32)Y);
+            return new PointF(X, Y);
         }
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace Map.CRS {
         /// <param name="A"></param>
         /// <param name="Scale"></param>
         /// <returns></returns>
-        public Coordinate UnTransform(Coordinate A, Int32 Scale) {
-            Double longitude = ((A.longitude / Scale) - (Double)this.B) / (Double)this.A;
-            Double latitude = ((A.latitude / Scale) - (Double)this.D) / (Double)this.C;
+        public Coordinate UnTransform(Coordinate A, Single Scale) {
+            Double longitude = ((A.longitude / Scale) - this.B) / this.A;
+            Double latitude = ((A.latitude / Scale) - this.D) / this.C;
 
             return new Coordinate(latitude, longitude);
         }
@@ -47,8 +47,8 @@ namespace Map.CRS {
         /// <param name="A"></param>
         /// <param name="Scale"></param>
         /// <returns></returns>
-        public Rectangle UnTransform(Rectangle A, Int32 Scale) {
-            return new Rectangle(this.UnTransform(A.Location, Scale), this.UnTransform(A.Size, Scale));
+        public RectangleF UnTransform(RectangleF A, Single Scale) {
+            return new RectangleF(this.UnTransform(A.Location, Scale), this.UnTransform(A.Size, Scale));
         }
     }
 }

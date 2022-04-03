@@ -5,7 +5,7 @@ namespace Map.Images {
     public partial class ResizeConfig : INewConfig {
         /// <inheritdoc/>
         public void SetNewInformation() {
-            this.CompositingMode = CompositingMode.SourceCopy;
+            this.CompositingMode = CompositingMode.SourceOver;
             this.CompositingQuality = CompositingQuality.HighQuality;
             this.InterpolationMode = InterpolationMode.HighQualityBicubic;
             this.SmoothingMode = SmoothingMode.HighQuality;

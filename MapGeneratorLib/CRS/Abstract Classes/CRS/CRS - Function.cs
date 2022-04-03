@@ -19,8 +19,8 @@ namespace Map.CRS {
         /// </summary>
         /// <param name="A"></param>
         /// <returns></returns>
-        public Point ToPoint(Coordinate A, Int32 Zoom) {
-            Int32 Scale = this.Scale(Zoom);
+        public PointF ToPoint(Coordinate A, Int32 Zoom) {
+            Single Scale = this.Scale(Zoom);
             A = this.Transformation.UnTransform(A, Scale);
 
             return this.ToPoint(A);
@@ -32,8 +32,8 @@ namespace Map.CRS {
         /// <param name="A"></param>
         /// <param name="Zoom"></param>
         /// <returns></returns>
-        public Coordinate ToCoordinate(Point A, Int32 Zoom) {
-            Int32 Scale = this.Scale(Zoom);
+        public Coordinate ToCoordinate(PointF A, Int32 Zoom) {
+            Single Scale = this.Scale(Zoom);
             A = this.Transformation.Transform(A, Scale);
 
             return this.ToCoordinate(A);
@@ -52,9 +52,18 @@ namespace Map.CRS {
         /// 
         /// </summary>
         /// <param name="point"></param>
+        /// <returns></returns>
+        public virtual PointF ToPointF(Coordinate point) {
+            return new PointF((Single)point.longitude, (Single)point.latitude);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="point"></param>
         /// <param name="Scale"></param>
         /// <returns></returns>
-        public virtual Coordinate ToCoordinate(Point point) {
+        public virtual Coordinate ToCoordinate(PointF point) {
             return new Coordinate((Double)point.Y, (Double)point.X);
         }
     }

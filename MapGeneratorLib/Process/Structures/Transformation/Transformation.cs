@@ -7,12 +7,12 @@ namespace Map.Process {
         /// <summary>
         /// 
         /// </summary>
-        public Rectangle From { get; set; }
+        public RectangleF From { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Rectangle To { get; set; }
+        public RectangleF To { get; set; }
 
         /// <summary>
         /// 

@@ -9,7 +9,7 @@ namespace Map.CRS {
         /// <param name="b"></param>
         /// <param name="c"></param>
         /// <param name="d"></param>
-        public Transformation(Double a, Double b, Double c, Double d) {
+        public Transformation(Single a, Single b, Single c, Single d) {
             this.A = a;
             this.B = b;
             this.C = c;

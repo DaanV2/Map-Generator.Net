@@ -13,10 +13,44 @@ namespace Map.Images {
         public Image Get() {
             Monitor.Enter(this._Lock);
 
-            if (File.Exists(this.Path))
-                return Image.FromFile(this.Path);
+            if (!File.Exists(this.Path))
+                return this.NewImage();
 
-            return new Bitmap(this.Size.Width, this.Size.Height, PixelFormat.Format32bppArgb);
+            FileStream Reader = null;
+            Image Out = null;
+
+            try {
+                Reader = new FileStream(this.Path, FileMode.Open, FileAccess.ReadWrite);
+                Out = Image.FromStream(Reader);
+
+                Reader.Flush();
+                Reader.Close();
+                Reader = null;
+            }
+            catch (Exception Ex) {
+                Console.WriteLine(this.Path);
+                Console.WriteLine(Ex.Message);
+            }
+            finally {
+                if (Reader is not null) {
+                    Reader.Flush();
+                    Reader.Close();
+                    Reader = null;
+                }
+            }
+
+            if (Out is null) {
+                return this.NewImage();
+            }
+
+            return Out;
+        }
+
+        private Image NewImage() {
+            var result = new Bitmap(this.Size.Width, this.Size.Height, PixelFormat.Format32bppArgb);
+
+
+            return result;
         }
 
         /// <summary>

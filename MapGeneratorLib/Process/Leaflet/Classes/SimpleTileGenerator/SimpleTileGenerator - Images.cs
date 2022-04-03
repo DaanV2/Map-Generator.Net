@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Map.CRS;
 using Map.Images;
@@ -53,40 +54,45 @@ namespace Map.Process.Leaflet {
             Project.Range ZRange = Image.Range;
             Size ImageRect = transformer.Source.Size;
             //The area in pixels
-            Rectangle PArea = this.ImageArea(Image.Area);
-            var PAreaMax = new Point(PArea.X + PArea.Width, PArea.Y + PArea.Height);
-            var Offset = new Point(PArea.Location.X * -1, PArea.Location.Y * -1);
+            RectangleF PArea = this.ImageArea(Image.Area);
+            var PAreaMax = new PointF(PArea.X + PArea.Width, PArea.Y + PArea.Height);
+            var Offset = new PointF(PArea.Location.X * -1, PArea.Location.Y * -1);
 
-            Int32 WidthTrans = ImageRect.Width / PArea.Width;
-            Int32 HeightTrans = ImageRect.Height / PArea.Height;
-
+            Single WidthTrans = ImageRect.Width / PArea.Width;
+            Single HeightTrans = ImageRect.Height / PArea.Height;
 
             for (Int32 Zoom = ZRange.Minimum; Zoom <= ZRange.Maximum; Zoom++) {
-                Int32 Scale = this.CRS.Scale(Zoom);
+                Single Scale = this.CRS.Scale(Zoom);
 
-                Int32 W = TileSize.Width / Scale;
-                Int32 H = TileSize.Height / Scale;
+                Single W = TileSize.Width / Scale;
+                Single H = TileSize.Height / Scale;
 
-                Int32 xStart = ((PArea.X * Scale) / W);
-                Int32 yStart = ((PArea.Y * Scale) / H);
-                Int32 xEnd = ((PAreaMax.X * Scale) / W);
-                Int32 yEnd = ((PAreaMax.Y * Scale) / H);
+                //To smal
+                if (W < 1 || H < 1) {
+                    continue;
+                }
 
-                for (Int32 X = xStart; X <= xEnd; X++) {
-                    for (Int32 Y = yStart; Y <= yEnd; Y++) {
-                        var TileZoom0 = new Rectangle(X * W, Y * H, W, H);
+                Single xStart = (PArea.X / W);
+                Single yStart = (PArea.Y / H);
+                Single xEnd = ((PAreaMax.X) / W);
+                Single yEnd = ((PAreaMax.Y) / H);
+
+                for (Single X = xStart; X <= xEnd; X++) {
+                    for (Single Y = yStart; Y <= yEnd; Y++) {
+                        var TileZoom0 = new RectangleF(X * W, Y * H, W, H);
                         if (!TileZoom0.IntersectsWith(PArea)) continue;
 
-                        Rectangle overlap = Overlap(TileZoom0, PArea);
-                        var TileSource = new Rectangle(
-                            new Point(overlap.X * WidthTrans, overlap.Y * HeightTrans),
-                            new Size(overlap.Width * WidthTrans, overlap.Height * HeightTrans)                            );
+                        var overlap = Overlap(TileZoom0, PArea);
+                        var TileSource = new RectangleF(
+                            new PointF((overlap.X - PArea.X) * WidthTrans, (overlap.Y - PArea.Y) * HeightTrans),
+                            new SizeF(overlap.Width * WidthTrans, overlap.Height * HeightTrans)
+                            );
 
                         Points.Add(new TransformationSpec() {
                             From = TileSource,
-                            To = new Rectangle(0, 0, overlap.Width * Scale, overlap.Height * Scale),
-                            TileX = X,
-                            TileY = Y,
+                            To = new RectangleF(overlap.X - TileZoom0.X, overlap.Y - TileZoom0.Y, overlap.Width * Scale, overlap.Height * Scale),
+                            TileX = (Int32)X,
+                            TileY = (Int32)Y,
                             TileZoom = Zoom
                         });
                     }
@@ -105,11 +111,16 @@ namespace Map.Process.Leaflet {
         }
 
 
-        private Rectangle ImageArea(Area area) {
-            var minp = this.CRS.ToPoint(area.Min);
-            var maxp = this.CRS.ToPoint(area.Max);
+        private RectangleF ImageArea(Area area) {
+            var minp = this.CRS.ToPointF(area.Min);
+            var maxp = this.CRS.ToPointF(area.Max);
 
-            return new Rectangle(minp.X, minp.Y, maxp.X - minp.X, maxp.Y - minp.Y);
+            return new RectangleF(
+                minp.X,
+                minp.Y,
+                maxp.X - minp.X,
+                maxp.Y - minp.Y
+            );
         }
 
         public static Rectangle Overlap(Rectangle A, Rectangle B) {
@@ -124,12 +135,29 @@ namespace Map.Process.Leaflet {
             return new Rectangle(From, (Size)(To - (Size)From));
         }
 
+        public static RectangleF Overlap(RectangleF A, RectangleF B) {
+            PointF point1 = A.Location;
+            PointF point2 = B.Location;
+
+            var From = new PointF(Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
+            point1.X += A.Width;
+            point1.Y += A.Height;
+            point2.X += B.Width;
+            point2.Y += B.Height;
+            var To = new PointF(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
+
+            return new RectangleF(From, new SizeF(To.X - From.X, To.Y - From.Y));
+        }
+
+
 
         private class ImageTransformer {
             public System.Drawing.Image Source;
             public IReporter Reporter;
             public ImageHandler ImageHandler;
 
+
+            [MethodImpl(MethodImplOptions.AggressiveOptimization)]
             public void Transform(TransformationSpec trans, ParallelLoopState State, Int64 Index) {
                 this.Reporter.Progress((Int32)Index);
                 ImageGate Gate = this.ImageHandler.Get(trans.TileX, trans.TileY, trans.TileZoom);

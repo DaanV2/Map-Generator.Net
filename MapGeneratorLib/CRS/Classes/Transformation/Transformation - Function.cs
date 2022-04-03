@@ -9,12 +9,12 @@ namespace Map.CRS {
         /// <param name="A"></param>
         /// <param name="B"></param>
         /// <returns></returns>
-        public static Transformation FromRectangle(Rectangle From, Rectangle To) {
-            Double A = (Double)To.Width / (Double)From.Width;
-            Double C = (Double)To.Height / (Double)From.Height;
+        public static Transformation FromRectangle(RectangleF From, RectangleF To) {
+            Single A = (Single)To.Width / (Single)From.Width;
+            Single C = (Single)To.Height / (Single)From.Height;
 
-            Double B = To.Location.X - From.Location.X;
-            Double D = To.Location.Y - From.Location.Y;
+            Single B = To.Location.X - From.Location.X;
+            Single D = To.Location.Y - From.Location.Y;
 
             return new Transformation(A, B, C, D);
         }
@@ -25,7 +25,7 @@ namespace Map.CRS {
         /// </summary>
         /// <param name="X"></param>
         /// <param name="Y"></param>
-        public void SetOffset(Double X, Double Y) {
+        public void SetOffset(Single X, Single Y) {
             this.B = X;
             this.D = Y;
         }

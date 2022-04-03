@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 namespace Map.CRS {
 
@@ -26,7 +25,7 @@ namespace Map.CRS {
         /// </summary>
         /// <param name="Zoom"></param>
         /// <returns></returns>
-        public abstract Int32 Scale(Int32 Zoom);
+        public abstract Single Scale(Int32 Zoom);
 
         /// <summary>
         /// 

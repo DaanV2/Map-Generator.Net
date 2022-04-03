@@ -3,15 +3,15 @@
 namespace Map.CRS {
     public partial class Transformation {
         /// <summary></summary>
-        public Double A { get; set; }
+        public Single A { get; set; }
 
         /// <summary></summary>
-        public Double B { get; set; }
+        public Single B { get; set; }
 
         /// <summary></summary>
-        public Double C { get; set; }
+        public Single C { get; set; }
 
         /// <summary></summary>
-        public Double D { get; set; }
+        public Single D { get; set; }
     }
 }

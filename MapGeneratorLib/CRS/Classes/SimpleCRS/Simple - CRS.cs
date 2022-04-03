@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 namespace Map.CRS {
     public partial class SimpleCRS : CRS {
@@ -10,8 +9,8 @@ namespace Map.CRS {
         public override Boolean Infinite => true;
 
         /// <inheritdoc/>
-        public override Int32 Scale(Int32 Zoom) {
-            return Convert.ToInt32(Math.Pow(2, Zoom));
+        public override Single Scale(Int32 Zoom) {
+            return Convert.ToSingle(Math.Pow(2, Zoom));
         }
 
         /// <inheritdoc/>

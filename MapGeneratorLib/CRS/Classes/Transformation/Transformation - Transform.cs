@@ -8,11 +8,11 @@ namespace Map.CRS {
         /// </summary>
         /// <param name="A"></param>
         /// <returns></returns>
-        public Size Transform(Size A, Int32 Scale) {
-            Double w = ((A.Width * this.A) + this.B) * Scale;
-            Double h = ((A.Height * this.C) + this.D) * Scale;
+        public SizeF Transform(SizeF A, Single Scale) {
+            Single w = ((A.Width * this.A) + this.B) * Scale;
+            Single h = ((A.Height * this.C) + this.D) * Scale;
 
-            return new Size((Int32)w, (Int32)h);
+            return new SizeF(w, h);
         }
 
         /// <summary>
@@ -21,11 +21,11 @@ namespace Map.CRS {
         /// <param name="A"></param>
         /// <param name="Scale"></param>
         /// <returns></returns>
-        public Point Transform(Point A, Int32 Scale) {
-            Double X = ((A.X * this.A) + this.B) * Scale;
-            Double Y = ((A.Y * this.C) + this.D) * Scale;
+        public PointF Transform(PointF A, Single Scale) {
+            Single X = ((A.X * this.A) + this.B) * Scale;
+            Single Y = ((A.Y * this.C) + this.D) * Scale;
 
-            return new Point((Int32)X, (Int32)Y);
+            return new PointF(X, Y);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Map.CRS {
         /// <param name="A"></param>
         /// <param name="Scale"></param>
         /// <returns></returns>
-        public Coordinate Transform(Coordinate A, Int32 Scale) {
+        public Coordinate Transform(Coordinate A, Single Scale) {
             Double longitude = ((A.longitude * this.A) + this.B) * Scale;
             Double latitude = ((A.latitude * this.C) + this.D) * Scale;
 
@@ -47,8 +47,8 @@ namespace Map.CRS {
         /// <param name="A"></param>
         /// <param name="Scale"></param>
         /// <returns></returns>
-        public Rectangle Transform(Rectangle A, Int32 Scale) {
-            return new Rectangle(this.Transform(A.Location, Scale), this.Transform(A.Size, Scale));
+        public RectangleF Transform(RectangleF A, Single Scale) {
+            return new RectangleF(this.Transform(A.Location, Scale), this.Transform(A.Size, Scale));
         }
     }
 }
