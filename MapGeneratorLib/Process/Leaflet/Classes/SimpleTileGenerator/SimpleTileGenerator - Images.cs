@@ -56,7 +56,6 @@ namespace Map.Process.Leaflet {
             //The area in pixels
             RectangleF PArea = this.ImageArea(Image.Area);
             var PAreaMax = new PointF(PArea.X + PArea.Width, PArea.Y + PArea.Height);
-            var Offset = new PointF(PArea.Location.X * -1, PArea.Location.Y * -1);
 
             Single WidthTrans = ImageRect.Width / PArea.Width;
             Single HeightTrans = ImageRect.Height / PArea.Height;
@@ -74,15 +73,15 @@ namespace Map.Process.Leaflet {
 
                 Single xStart = (PArea.X / W);
                 Single yStart = (PArea.Y / H);
-                Single xEnd = ((PAreaMax.X) / W);
-                Single yEnd = ((PAreaMax.Y) / H);
+                Single xEnd = (PAreaMax.X / W);
+                Single yEnd = (PAreaMax.Y / H);
 
                 for (Single X = xStart; X <= xEnd; X++) {
                     for (Single Y = yStart; Y <= yEnd; Y++) {
                         var TileZoom0 = new RectangleF(X * W, Y * H, W, H);
                         if (!TileZoom0.IntersectsWith(PArea)) continue;
 
-                        var overlap = Overlap(TileZoom0, PArea);
+                        RectangleF overlap = Overlap(TileZoom0, PArea);
                         var TileSource = new RectangleF(
                             new PointF((overlap.X - PArea.X) * WidthTrans, (overlap.Y - PArea.Y) * HeightTrans),
                             new SizeF(overlap.Width * WidthTrans, overlap.Height * HeightTrans)

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using Map.CRS;
 
 namespace Map.Process.Leaflet {
     ///DOLATER <summary>add description for class: SimpleTileGenerator</summary>
@@ -8,6 +10,7 @@ namespace Map.Process.Leaflet {
         public SimpleTileGenerator([NotNull] IReporter reporter) {
             this.Reporter = reporter ?? Reporters.GetEmptyReporter();
             this.CRS = new CRS.SimpleCRS();
+
         }
     }
 }

@@ -8,5 +8,8 @@ namespace Map.Images {
 
         /// <summary></summary>
         public static ResizeConfig Resize => ConfigMapper.Get<ResizeConfig>();
+
+        /// <summary></summary>
+        public static LabelConfig Labels => ConfigMapper.Get<LabelConfig>();
     }
 }
