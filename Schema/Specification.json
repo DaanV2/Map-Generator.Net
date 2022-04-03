@@ -72,10 +72,10 @@
             "title": "Area",
             "description": "Area this image occupies on zoom level 0",
             "items": [
-              { "type": "number", "title": "X" },
-              { "type": "number", "title": "Y" },
-              { "type": "number", "title": "Width" },
-              { "type": "number", "title": "Height" }
+              { "type": "number", "title": "From Latiude" },
+              { "type": "number", "title": "From Longitude" },
+              { "type": "number", "title": "To Latiude" },
+              { "type": "number", "title": "To Longitude" }
             ]
           }
         }
