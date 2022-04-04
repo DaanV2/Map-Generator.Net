@@ -36,8 +36,8 @@
       "description": "A range of values.",
       "type": "array",
       "items": [
-        { "type": "number", "title": "X" },
-        { "type": "number", "title": "Y" }
+        { "type": "number", "title": "Latitude", "description": "The up or down" },
+        { "type": "number", "title": "Longitude", "description": "The left to right" }
       ]
     }
   },
