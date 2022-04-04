@@ -18,8 +18,8 @@ namespace Map.Images {
             ResizeConfig ResizeC = ImagesConfig.Resize;
             LabelConfig LabelC = ImagesConfig.Labels;
 
-            var Font = new Font("Verdana", 12, FontStyle.Bold, GraphicsUnit.Pixel);
-            var Brush = new SolidBrush(Color.White);
+            var Font = new Font("Verdana", 14, FontStyle.Bold, GraphicsUnit.Pixel);
+            Brush WBrush = System.Drawing.Brushes.WhiteSmoke;
             SizeF Size;
 
             using (var graphics = Graphics.FromImage(Receiver)) {
@@ -30,7 +30,7 @@ namespace Map.Images {
                 graphics.PixelOffsetMode = ResizeC.PixelOffsetMode;
 
                 Size = graphics.MeasureString(Text, Font);
-                graphics.DrawString(Text, Font, Brush, Location);
+                graphics.DrawString(Text, Font, WBrush, Location);
             }
 
             return Size;
