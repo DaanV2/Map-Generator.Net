@@ -11,8 +11,12 @@ namespace Map.Project {
         /// <returns>A specification</returns>
         [return: NotNull]
         public static Specification Load([DisallowNull] String Filepath) {
+            var Options = new JsonSerializerOptions {
+                ReadCommentHandling = JsonCommentHandling.Skip
+            };
+
             FileStream Reader = File.OpenRead(Filepath);
-            ValueTask<Specification> VTask = JsonSerializer.DeserializeAsync<Specification>(Reader);
+            ValueTask<Specification> VTask = JsonSerializer.DeserializeAsync<Specification>(Reader, Options);
             VTask.AsTask().Wait();
 
             Reader.Close();
