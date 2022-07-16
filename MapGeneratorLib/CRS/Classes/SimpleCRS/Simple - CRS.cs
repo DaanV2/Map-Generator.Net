@@ -2,7 +2,6 @@
 
 namespace Map.CRS {
     public partial class SimpleCRS : CRS {
-
         /// <inheritdoc/>
         public override Single Scale(Int32 Zoom) {
             return Convert.ToSingle(Math.Pow(2, Zoom));

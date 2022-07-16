@@ -15,7 +15,7 @@ namespace TestMap.CRS.TransformTest {
         [DataRow(10, 10, 20, 50, DisplayName = "10, 10 => 20, 50")]
         [DataRow(0, 10, 10, 50, DisplayName = "0, 10 => 10, 50")]
         [DataRow(10, 0, 20, 25, DisplayName = "10, 0 => 20, 25")]
-        [DataRow(5, 5, 15, 37.5, DisplayName = "10, 0 => 20, 25")]
+        [DataRow(5, 5, 15, 37.5, DisplayName = "5, 5 => 15, 37.5")]
         public void Test_Transform(Double X, Double Y, Double expectedX, Double expectedY) {
             (Double X, Double Y) Data = Trans.Transform(X, Y);
 
@@ -24,11 +24,11 @@ namespace TestMap.CRS.TransformTest {
         }
 
         [TestMethod]
-        [DataRow(0, 0, 10, 25, DisplayName = "0, 0 <= 10, 25")]
-        [DataRow(10, 10, 20, 50, DisplayName = "10, 10 <= 20, 50")]
-        [DataRow(0, 10, 10, 50, DisplayName = "0, 10 <= 10, 50")]
+        [DataRow(0d, 0, 10, 25, DisplayName = "0, 0 <= 10, 25")]
+        [DataRow(10d, 10, 20, 50, DisplayName = "10, 10 <= 20, 50")]
+        [DataRow(0d, 10, 10, 50, DisplayName = "0, 10 <= 10, 50")]
         [DataRow(10, 0, 20, 25, DisplayName = "10, 0 <= 20, 25")]
-        [DataRow(5, 5, 15, 37.5, DisplayName = "10, 0 <= 20, 25")]
+        [DataRow(5, 5, 15, 37.5, DisplayName = "5, 5 <= 15, 37.5")]
         public void Test_UnTransform(Double expectedX, Double expectedY, Double X, Double Y) {
             (Double X, Double Y) Data = Trans.Untransform(X, Y);
 
