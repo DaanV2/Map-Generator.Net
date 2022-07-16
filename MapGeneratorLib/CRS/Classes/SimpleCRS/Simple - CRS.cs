@@ -2,11 +2,6 @@
 
 namespace Map.CRS {
     public partial class SimpleCRS : CRS {
-        /// <inheritdoc/>
-        public override Area Bounds => new(new Coordinate(Double.MinValue, Double.MinValue), new Coordinate(Double.MaxValue, Double.MaxValue));
-
-        /// <inheritdoc/>
-        public override Boolean Infinite => true;
 
         /// <inheritdoc/>
         public override Single Scale(Int32 Zoom) {

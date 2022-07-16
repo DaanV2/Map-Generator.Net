@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Map.CRS {
-    public partial class Transformation {
+    public readonly partial struct Transformation {
         /// <summary>
         /// 
         /// </summary>
@@ -9,11 +9,11 @@ namespace Map.CRS {
         /// <param name="b"></param>
         /// <param name="c"></param>
         /// <param name="d"></param>
-        public Transformation(Single a, Single b, Single c, Single d) {
-            this.A = a;
-            this.B = b;
-            this.C = c;
-            this.D = d;
+        public Transformation(Double a, Double b, Double c, Double d) {
+            this._A = a;
+            this._B = b;
+            this._C = c;
+            this._D = d;
         }
     }
 }
