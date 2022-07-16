@@ -12,7 +12,8 @@ namespace Map.Project {
         [return: NotNull]
         public static Specification Load([DisallowNull] String Filepath) {
             var Options = new JsonSerializerOptions {
-                ReadCommentHandling = JsonCommentHandling.Skip
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                AllowTrailingCommas = true
             };
 
             FileStream Reader = File.OpenRead(Filepath);
