@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Map.CRS;
 using Map.Images;
 using Map.Project;
@@ -37,18 +35,16 @@ namespace Map.Process.Leaflet {
         /// <param name="Image"></param>
         /// <param name="Spec"></param>
         public void Process(Image Image, Specification Spec) {
-            var Points = new List<TransformationSpec>();
             var TileSize = new Size(ImagesConfig.Tiles.TileWidth, ImagesConfig.Tiles.TileHeight);
             var TileRect = new Rectangle(new Point(0, 0), TileSize);
 
             this.Reporter.WriteLine("Loading: " + Image.Filepath);
-            var transformer = new ImageTransformer() {
-                Source = System.Drawing.Image.FromFile(Image.Filepath),
-                Reporter = this.Reporter,
-                ImageHandler = this.ImageHandler
-            };
+            var transformer = new ImageTransformer(
+                System.Drawing.Image.FromFile(Image.Filepath),
+                this.Reporter,
+                this.ImageHandler);
 
-            this.Reporter.WriteLine("Tiling...");
+            List<TransformationSpec> Points = transformer.TileImage(Image);
 
             //Coordinates
             Project.Range ZRange = Image.Range;
@@ -109,7 +105,6 @@ namespace Map.Process.Leaflet {
             }
         }
 
-
         private RectangleF ImageArea(Area area) {
             var minp = this.CRS.ToPointF(area.Min);
             var maxp = this.CRS.ToPointF(area.Max);
@@ -146,34 +141,6 @@ namespace Map.Process.Leaflet {
             var To = new PointF(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
 
             return new RectangleF(From, new SizeF(To.X - From.X, To.Y - From.Y));
-        }
-
-
-
-        private class ImageTransformer {
-            public System.Drawing.Image Source;
-            public IReporter Reporter;
-            public ImageHandler ImageHandler;
-
-
-            [MethodImpl(MethodImplOptions.AggressiveOptimization)]
-            public void Transform(TransformationSpec trans, ParallelLoopState State, Int64 Index) {
-                this.Reporter.Progress((Int32)Index);
-                ImageGate Gate = this.ImageHandler.Get(trans.TileX, trans.TileY, trans.TileZoom);
-
-                System.Drawing.Image Destination = Gate.Get();
-                ImageCutter.CutImage(this.Source, Destination, trans.From, trans.To);
-
-                Gate.Set(ref Destination);
-            }
-
-            ~ImageTransformer() {
-                this.Source.Dispose();
-                this.Source = null;
-                this.Reporter = null;
-                this.ImageHandler = null;
-                GC.Collect();
-            }
         }
     }
 }

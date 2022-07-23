@@ -9,14 +9,14 @@ namespace Map.CRS {
         /// <param name="latitude">Y</param>
         /// <param name="longitude">X</param>
         public Coordinate(Double latitude, Double longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.Latitude = latitude;
+            this.Longitude = longitude;
         }
 
         /// <summary>Y</summary>
-        public readonly Double latitude;
+        public readonly Double Latitude;
 
         /// <summary>X</summary>
-        public readonly Double longitude;
+        public readonly Double Longitude;
     }
 }

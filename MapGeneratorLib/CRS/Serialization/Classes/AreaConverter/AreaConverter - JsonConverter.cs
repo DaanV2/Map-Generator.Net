@@ -36,10 +36,10 @@ namespace Map.CRS.Serialization {
         public override void Write(Utf8JsonWriter writer, Area value, JsonSerializerOptions options) {
             writer.WriteStartArray();
 
-            writer.WriteNumberValue(value.Min.latitude);
-            writer.WriteNumberValue(value.Min.longitude);
-            writer.WriteNumberValue(value.Max.latitude);
-            writer.WriteNumberValue(value.Max.longitude);
+            writer.WriteNumberValue(value.Min.Latitude);
+            writer.WriteNumberValue(value.Min.Longitude);
+            writer.WriteNumberValue(value.Max.Latitude);
+            writer.WriteNumberValue(value.Max.Longitude);
 
             writer.WriteEndArray();
         }

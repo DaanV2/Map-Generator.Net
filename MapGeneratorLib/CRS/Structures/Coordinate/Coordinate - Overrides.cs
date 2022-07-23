@@ -9,13 +9,13 @@ namespace Map.CRS {
 
         /// <inheritdoc/>
         public Boolean Equals(Coordinate other) {
-            return this.latitude == other.latitude &&
-                   this.longitude == other.longitude;
+            return this.Latitude == other.Latitude &&
+                   this.Longitude == other.Longitude;
         }
 
         /// <inheritdoc/>
         public override Int32 GetHashCode() {
-            return HashCode.Combine(this.latitude, this.longitude);
+            return HashCode.Combine(this.Latitude, this.Longitude);
         }
 
         /// <inheritdoc/>
@@ -30,7 +30,7 @@ namespace Map.CRS {
 
         /// <inheritdoc/>
         public override String ToString() {
-            return $"latLng[{this.latitude},{this.longitude}]";
+            return $"latLng[{this.Latitude},{this.Longitude}]";
         }
     }
 }
