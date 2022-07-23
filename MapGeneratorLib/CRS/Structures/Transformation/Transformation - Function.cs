@@ -18,5 +18,21 @@ namespace Map.CRS {
 
             return new Transformation(A, B, C, D);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="From"></param>
+        /// <param name="To"></param>
+        /// <returns></returns>
+        public static Transformation FromRectangle(Area From, Area To) {
+            Double A = To.Width / From.Width;
+            Double C = To.Height /From.Height;
+
+            Double B = To.Min.Longitude - From.Min.Longitude;
+            Double D = To.Min.Latitude - From.Min.Latitude;
+
+            return new Transformation(A, B, C, D);
+        }
     }
 }

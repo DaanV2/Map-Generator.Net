@@ -21,8 +21,8 @@ namespace Map.CRS {
         /// <returns></returns>
         public static Area Create(Coordinate a, Coordinate b) {
             return new Area(
-                new Coordinate(Math.Min(a.latitude, b.latitude), Math.Min(a.longitude, b.longitude)),
-                new Coordinate(Math.Max(a.latitude, b.latitude), Math.Max(a.longitude, b.longitude))
+                new Coordinate(Math.Min(a.Latitude, b.Latitude), Math.Min(a.Longitude, b.Longitude)),
+                new Coordinate(Math.Max(a.Latitude, b.Latitude), Math.Max(a.Longitude, b.Longitude))
                 );
         }
 

@@ -11,7 +11,7 @@ namespace Map.Process.Leaflet {
         /// <param name="coordinate"></param>
         /// <returns></returns>
         public static PointF ToPointF(this CRS.CRS CRS, Coordinate coordinate) {
-            (Double X, Double Y) = CRS.Transformation.Transform(coordinate.longitude, coordinate.latitude);
+            (Double X, Double Y) = CRS.Transformation.Transform(coordinate.Longitude, coordinate.Latitude);
             return new PointF((Single)X, (Single)Y);
         }
 
@@ -22,7 +22,7 @@ namespace Map.Process.Leaflet {
         /// <param name="coordinate"></param>
         /// <returns></returns>
         public static Point ToPoint(this CRS.CRS CRS, Coordinate coordinate) {
-            (Double X, Double Y) = CRS.Transformation.Transform(coordinate.longitude, coordinate.latitude);
+            (Double X, Double Y) = CRS.Transformation.Transform(coordinate.Longitude, coordinate.Latitude);
             return new Point((Int32)X, (Int32)Y);
         }
     }

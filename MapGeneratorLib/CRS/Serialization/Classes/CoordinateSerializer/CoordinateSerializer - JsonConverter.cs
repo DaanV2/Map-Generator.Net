@@ -62,8 +62,8 @@ namespace Map.CRS.Serialization {
         public override void Write(Utf8JsonWriter writer, Coordinate value, JsonSerializerOptions options) {
             writer.WriteStartArray();
 
-            writer.WriteNumberValue(value.latitude);
-            writer.WriteNumberValue(value.longitude);
+            writer.WriteNumberValue(value.Latitude);
+            writer.WriteNumberValue(value.Longitude);
 
             writer.WriteEndArray();
         }
