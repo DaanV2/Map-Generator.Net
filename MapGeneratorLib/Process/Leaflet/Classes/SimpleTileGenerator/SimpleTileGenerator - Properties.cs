@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 
 namespace Map.Process.Leaflet {
     public partial class SimpleTileGenerator {
@@ -11,5 +12,11 @@ namespace Map.Process.Leaflet {
 
         /// <summary></summary>
         public Images.ImageHandler ImageHandler { get; private set; }
+
+        /// <summary>
+        /// The size of a tile
+        /// </summary>
+        /// <returns></returns>
+        public SizeF TileSizeF { get; private set; }
     }
 }

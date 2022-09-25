@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\MapGeneratorLib\MapGeneratorLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CRS\" />
+  </ItemGroup>
+
 </Project>

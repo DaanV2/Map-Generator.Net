@@ -38,8 +38,6 @@ namespace Map.Process.Leaflet {
         /// <param name="Spec"></param>
         public void Process(Image Image, Specification Spec) {
             var Points = new List<TransformationSpec>();
-            var TileSize = new Size(ImagesConfig.Tiles.TileWidth, ImagesConfig.Tiles.TileHeight);
-            var TileRect = new Rectangle(new Point(0, 0), TileSize);
 
             this.Reporter.WriteLine("Loading: " + Image.Filepath);
             var transformer = new ImageTransformer() {
@@ -53,43 +51,49 @@ namespace Map.Process.Leaflet {
             //Coordinates
             Project.Range ZRange = Image.Range;
             Size ImageRect = transformer.Source.Size;
-            //The area in pixels
+            //The area in coordinates of the image
             RectangleF PArea = this.ImageArea(Image.Area);
-            var PAreaMax = new PointF(PArea.X + PArea.Width, PArea.Y + PArea.Height);
 
             Single WidthTrans = ImageRect.Width / PArea.Width;
             Single HeightTrans = ImageRect.Height / PArea.Height;
 
             for (Int32 Zoom = ZRange.Minimum; Zoom <= ZRange.Maximum; Zoom++) {
-                Single Scale = this.CRS.Scale(Zoom);
-
-                Single W = TileSize.Width / Scale;
-                Single H = TileSize.Height / Scale;
+                SizeF TileSizeAtScale = this.TileSize(Zoom);
 
                 //To smal
-                if (W < 1 || H < 1) {
+                if (TileSizeAtScale.Width <= 0 || TileSizeAtScale.Height <= 0) {
                     continue;
                 }
 
-                Single xStart = (PArea.X / W);
-                Single yStart = (PArea.Y / H);
-                Single xEnd = (PAreaMax.X / W);
-                Single yEnd = (PAreaMax.Y / H);
+                //Calculate the tile indexes the image occupies on this level
+                (Int32 TileXStart, Int32 TileXEnd, Int32 TileYStart, Int32 TileYEnd) = this.TileIndexes(TileSizeAtScale, PArea);
 
-                for (Single X = xStart; X <= xEnd; X++) {
-                    for (Single Y = yStart; Y <= yEnd; Y++) {
-                        var TileZoom0 = new RectangleF(X * W, Y * H, W, H);
-                        if (!TileZoom0.IntersectsWith(PArea)) continue;
+                //Loop over all tiles
+                for (Single X = TileXStart; X <= TileXEnd; X++) {
+                    for (Single Y = TileYStart; Y <= TileYEnd; Y++) {
+                        //Get tile (area) At the specific coordinates
+                        var TilePoint = new PointF(X * TileSizeAtScale.Width, Y * TileSizeAtScale.Height);
+                        var TileArea = new RectangleF(TilePoint, TileSizeAtScale);
 
-                        RectangleF overlap = Overlap(TileZoom0, PArea);
+                        RectangleF overlap = Overlap(TileArea, PArea);
+                        if (overlap.Height <= 0 || overlap.Width <= 0) {
+                            continue;
+                        }
+
+                        //The pixel area of the image that need to go in the tile
                         var TileSource = new RectangleF(
                             new PointF((overlap.X - PArea.X) * WidthTrans, (overlap.Y - PArea.Y) * HeightTrans),
                             new SizeF(overlap.Width * WidthTrans, overlap.Height * HeightTrans)
                             );
+                        
+                        //The relative area inside of the tile itself, used to convert to pixels
+                        var TileTo = new RectangleF(
+                            new PointF((overlap.X - TileArea.X), (overlap.Y - TileArea.Y)),
+                            overlap.Size);
 
                         Points.Add(new TransformationSpec() {
                             From = TileSource,
-                            To = new RectangleF(overlap.X - TileZoom0.X, overlap.Y - TileZoom0.Y, overlap.Width * Scale, overlap.Height * Scale),
+                            To = this.TilePixelArea(TileTo, TileSizeAtScale),
                             TileX = (Int32)X,
                             TileY = (Int32)Y,
                             TileZoom = Zoom
@@ -97,7 +101,6 @@ namespace Map.Process.Leaflet {
                     }
                 }
             }
-
 
             this.Reporter.WriteLine("Transforming...");
             this.Reporter.Progress(0, Points.Count);
@@ -107,6 +110,45 @@ namespace Map.Process.Leaflet {
 
                 transformer.Transform(Current, null, I);
             }
+        }
+
+        /// <summary>Calculates the size of the tile at the given index (expressed in coordinates)</summary>
+        /// <param name="Zoom"></param>
+        /// <returns></returns>
+        public SizeF TileSize(Int32 Zoom) {
+            Single Scale = this.CRS.Scale(Zoom);
+
+            return new SizeF(this.TileSizeF.Width / Scale, this.TileSizeF.Height / Scale);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="TileSizeAtScale"></param>
+        /// <param name="Area"></param>
+        /// <returns></returns>
+        public (Int32 xStart, Int32 xEnd, Int32 yStart, Int32 yEnd) TileIndexes(SizeF TileSizeAtScale, RectangleF Area) {
+            //Calculate the tile indexes the image occupies on this level
+            Int32 TileXStart = (Int32)(MathF.Floor(Area.X / TileSizeAtScale.Width));
+            Int32 TileXEnd = (Int32)(MathF.Ceiling((Area.X + Area.Width) / TileSizeAtScale.Width));
+
+            Int32 TileYStart = (Int32)(MathF.Floor(Area.Y / TileSizeAtScale.Height));
+            Int32 TileYEnd = (Int32)(MathF.Ceiling((Area.Y + Area.Height) / TileSizeAtScale.Height));
+
+            return (TileXStart, TileXEnd, TileYStart, TileYEnd);
+        }
+
+        /// <summary>Translates a tiles coordinate area to pixel area</summary>
+        /// <param name="Coordinates"></param>
+        /// <param name="TileSizeAtScale"></param>
+        /// <returns></returns>
+        public RectangleF TilePixelArea(RectangleF Coordinates, SizeF TileSizeAtScale) {
+            Single WidthTrans = this.TileSizeF.Width / TileSizeAtScale.Width;
+            Single HeightTrans = this.TileSizeF.Height / TileSizeAtScale.Height;
+
+            return new RectangleF(
+                new PointF(Coordinates.X * WidthTrans, Coordinates.Y * HeightTrans),
+                new SizeF(Coordinates.Width * WidthTrans, Coordinates.Height * HeightTrans));
         }
 
 
@@ -135,15 +177,8 @@ namespace Map.Process.Leaflet {
         }
 
         public static RectangleF Overlap(RectangleF A, RectangleF B) {
-            PointF point1 = A.Location;
-            PointF point2 = B.Location;
-
-            var From = new PointF(Math.Max(point1.X, point2.X), Math.Max(point1.Y, point2.Y));
-            point1.X += A.Width;
-            point1.Y += A.Height;
-            point2.X += B.Width;
-            point2.Y += B.Height;
-            var To = new PointF(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
+            var From = new PointF(Math.Max(A.Left, B.Left), Math.Max(A.Top, B.Top));
+            var To = new PointF(Math.Min(A.Right, B.Right), Math.Min(A.Bottom, B.Bottom));
 
             return new RectangleF(From, new SizeF(To.X - From.X, To.Y - From.Y));
         }
