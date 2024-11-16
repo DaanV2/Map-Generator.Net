@@ -4,25 +4,25 @@ using DaanV2.Config;
 using Map.Process;
 using Map.Project;
 
-namespace ConsoleGenerator {
-    public class Program {
-        public static void Main(String[] args) {
-            ConfigMapper.Preload(typeof(Map.CRS.Area).Assembly);
+namespace ConsoleGenerator;
 
-            Console.WriteLine("Specification Filepath?");
+public class Program {
+    public static void Main(String[] args) {
+        ConfigMapper.Preload(typeof(Map.CRS.Area).Assembly);
 
-            String Spec = Console.ReadLine();
-            Spec.Trim();
-            if (Spec.StartsWith('"') && Spec.EndsWith('"')) {
-                Spec = Spec.Substring(1, Spec.Length - 1);
-            }
+        Console.WriteLine("Specification Filepath?");
 
-            if (!File.Exists(Spec)) throw new FileNotFoundException("Cannot find specification file", Spec);
-
-            var Result = Specification.Load(Spec);
-            var Generator = new TileGenerator(Reporters.GetConsoleReporter());
-
-            Generator.Process(Result);
+        String Spec = Console.ReadLine();
+        Spec = Spec.Trim();
+        if (Spec.StartsWith('"') && Spec.EndsWith('"')) {
+            Spec = Spec[1..];
         }
+
+        if (!File.Exists(Spec)) throw new FileNotFoundException("Cannot find specification file", Spec);
+
+        var Result = Specification.Load(Spec);
+        var Generator = new TileGenerator(Reporters.GetConsoleReporter());
+
+        Generator.Process(Result);
     }
 }
